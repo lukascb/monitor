@@ -22,48 +22,38 @@ A aplicação consiste em dois executáveis: monitoramento e leitura.
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* https://github.com/lukascb/monitor
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+* git clone https://github.com/lukascb/monitor
+* gcc -g /home/lucas/Downloads/monitor/v4/monitor.c -lm -o /home/lucas/Downloads/monitor/v4/monitor
+* gcc -g /home/lucas/Downloads/monitor/v4/leitor.c -lm -o /home/lucas/Downloads/monitor/v4/leitor
 ```
-code blocks for commands
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
+Ordem de execução
+* Iniciar ./leitor
+* Iniciar ./monitor
 ```
 
 ## Authors
 
-Contributors names and contact info
+Contributors names
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+ex. Lucas Babeto  
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
 * 0.1
     * Initial Release
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the GPL 3.0 License 
 
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* [Code Vault](https://code-vault.net/)
+* [Sketchbook](https://github.com/ericomeehan/sketchbook/blob/c_pipes/)
+* [TutorialsPoint](https://www.tutorialspoint.com/named-pipe-or-fifo-with-example-c-program)
+* [geeksforgeeks](https://www.geeksforgeeks.org/named-pipe-fifo-example-c-program/)
