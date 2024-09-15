@@ -27,8 +27,8 @@ A aplicação consiste em dois executáveis: monitoramento e leitura.
 ### Executing program
 
 * git clone https://github.com/lukascb/monitor
-* gcc -g /home/lucas/Downloads/monitor/v4/monitor.c -lm -o /home/lucas/Downloads/monitor/v4/monitor
-* gcc -g /home/lucas/Downloads/monitor/v4/leitor.c -lm -o /home/lucas/Downloads/monitor/v4/leitor
+* gcc -g ./monitor.c -lm -o ./monitor
+* gcc -g ./leitor.c -lm -o ./leitor
 ```
 Ordem de execução
 * Iniciar ./leitor
