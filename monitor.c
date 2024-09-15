@@ -20,8 +20,8 @@ int main(){
     char *continuar = "continuar";
     time_t start,end,timestamp;
     struct tm date;
-    double t,result;
-    double mod = 7.0;
+    double t,result = -1.;
+    double mod = 10.0;
 
     time(&start);
     while (1){
@@ -33,8 +33,6 @@ int main(){
         }
         if(strcmp(dado,"finalizado") == 0){
             log_to("./log.txt", "./login: Finalizado");
-
-            start,end = 0.0;
             pid_t p = fork(); 
             if(p<0){ 
                 perror("Falha ao gerar processo"); 
@@ -51,7 +49,7 @@ int main(){
 
             break;
         }
-        if( result == 0){
+        if( result == 0.){
             read(pfd,dado,sizeof(dado));
             write(pfd,finalizado,strlen(finalizado)+1);
         }
@@ -59,7 +57,8 @@ int main(){
         time(&end);
         t = difftime(end,start);
         result = fmod(t,mod);
-        printf("###MONITOR### => %.1f\n",difftime(end,start));
+        printf("###MONITOR### => %f\n",difftime(end,start));
+        printf("MOD: %f\n",result);
     }
 }
 

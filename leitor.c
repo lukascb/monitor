@@ -30,7 +30,7 @@ int main(void){
         pfd = open(FIFO,O_RDWR|O_NONBLOCK);
         sleep(1);
         read(pfd,dado,sizeof(dado));
-        printf("Dado=>%s\n",dado);
+        printf("./leitor => Dado: %s\n",dado);
         
         if(strcmp(dado,"continuar") == 0){
             write(pfd,continuar,strlen(continuar)+1);
