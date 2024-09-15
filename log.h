@@ -1,0 +1,1 @@
+int log_to(char *file, char*content);
