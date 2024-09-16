@@ -35,6 +35,13 @@ Ordem de execução
 * Iniciar ./monitor
 ```
 
+Falhas
+```
+- Após iniciar a execução das aplicações, remover as permissões de escrita e leitura dos arquivos:
+ * data.txt => Torna a aplicação indisponível
+ * log.txt => Torna a aplicação indisponível
+```
+
 ## Authors
 
 Contributors names
