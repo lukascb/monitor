@@ -25,11 +25,20 @@ int main(){
 
     time(&start);
     while (1){
-        pfd = open(FIFO,O_RDWR|O_NONBLOCK);
+        if ((pfd = open(FIFO,O_RDWR|O_NONBLOCK)) == -1){
+            printf("data.txt => %s",strerror(errno));
+            break;
+        }
         sleep(1);
-        read(pfd,dado,sizeof(dado));
+        if(read(pfd,dado,sizeof(dado)) == -1){
+            printf("data.txt => %s",strerror(errno));
+            break;
+        }
         if(strcmp(dado,"continuar") == 0){
-            write(pfd,continuar,strlen(continuar)+1);
+            if(write(pfd,continuar,strlen(continuar)+1)== -1){
+                printf("data.txt => %s",strerror(errno));
+                break;
+            }
         }
         if(strcmp(dado,"finalizado") == 0){
             log_to("./log.txt", "./login: Finalizado");
@@ -50,15 +59,20 @@ int main(){
             break;
         }
         if( result == 0.){
-            read(pfd,dado,sizeof(dado));
-            write(pfd,finalizado,strlen(finalizado)+1);
+            if(read(pfd,dado,sizeof(dado)) == -1){
+               printf("data.txt => %s",strerror(errno));
+             break;
+            }
+            if(write(pfd,finalizado,strlen(finalizado)+1) == -1){
+                printf("data.txt => %s",strerror(errno));
+                break;
+            }
         }
         close(pfd);
         time(&end);
         t = difftime(end,start);
         result = fmod(t,mod);
         printf("###MONITOR### => %f\n",difftime(end,start));
-        printf("MOD: %f\n",result);
     }
 }
 
@@ -87,10 +101,11 @@ int log_to(char *file, char *content){
             dateString[i] = '\0';
         }
     }
-    //dateString[len] = '\0';
-    fprintf(fd,"%s => %s\n",dateString,content);
+    if(fprintf(fd,"%s => %s\n",dateString,content) < 0){
+            printf("data.txt => %s",strerror(errno));
+            return 1;
+        }
     fclose(fd);
-
     printf("%s\n",dateString);
     return 0;
 }
