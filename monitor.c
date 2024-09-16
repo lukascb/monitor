@@ -26,18 +26,30 @@ int main(){
     time(&start);
     while (1){
         if ((pfd = open(FIFO,O_RDWR|O_NONBLOCK)) == -1){
-            printf("data.txt => %s",strerror(errno));
-            break;
+            if(errno == 17 || 11 ){
+                continue;
+            }else {
+                printf("data.txt => %s - %d",strerror(errno), errno);
+                break;
+            } 
         }
         sleep(1);
         if(read(pfd,dado,sizeof(dado)) == -1){
-            printf("data.txt => %s",strerror(errno));
-            break;
+            if(errno == 17 || 11 ){
+                continue;
+            }else {
+                printf("data.txt => %s - %d",strerror(errno), errno);
+                break;
+            }    
         }
         if(strcmp(dado,"continuar") == 0){
             if(write(pfd,continuar,strlen(continuar)+1)== -1){
-                printf("data.txt => %s",strerror(errno));
-                break;
+                if(errno == 17 || 11 ){
+                    continue;
+                }else {
+                    printf("data.txt => %s - %d",strerror(errno), errno);
+                    break;
+                } 
             }
         }
         if(strcmp(dado,"finalizado") == 0){
@@ -55,17 +67,24 @@ int main(){
             }else{
                 continue;
             }
-
             break;
         }
         if( result == 0.){
             if(read(pfd,dado,sizeof(dado)) == -1){
-               printf("data.txt => %s",strerror(errno));
-             break;
+               if(errno == 17 || 11 ){
+                    continue;
+                }else {
+                    printf("data.txt => %s - %d",strerror(errno), errno);
+                    break;
+                } 
             }
             if(write(pfd,finalizado,strlen(finalizado)+1) == -1){
-                printf("data.txt => %s",strerror(errno));
-                break;
+                if(errno == 17 || 11 ){
+                    continue;
+                }else {
+                    printf("data.txt => %s - %d",strerror(errno), errno);
+                    break;
+                } 
             }
         }
         close(pfd);
@@ -102,8 +121,10 @@ int log_to(char *file, char *content){
         }
     }
     if(fprintf(fd,"%s => %s\n",dateString,content) < 0){
-            printf("data.txt => %s",strerror(errno));
-            return 1;
+            if(errno != 17 || 11){
+                printf("log.txt => %s",strerror(errno));
+                return 1;
+            }
         }
     fclose(fd);
     printf("%s\n",dateString);

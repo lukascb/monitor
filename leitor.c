@@ -18,26 +18,45 @@ int main(void){
 
     int pfd = open(FIFO,O_RDWR|O_NONBLOCK);
     int w = write(pfd,continuar,strlen(continuar)+1);
-    
-
-    if(w == -1){
+   
+    /*if(pfd == -1 || w == -1){
         perror("data.txt");
         return 1;
-    }
+    }*/
 
     
     while (1){
-        pfd = open(FIFO,O_RDWR|O_NONBLOCK);
+        if(pfd = open(FIFO,O_RDWR|O_NONBLOCK)){
+            if(errno != 17){
+                printf("data.txt => %s => %d",strerror(errno),errno);
+                break;
+            }
+        }
         sleep(1);
-        read(pfd,dado,sizeof(dado));
+        if(read(pfd,dado,sizeof(dado)) == -1){
+            if(errno != 17){
+                printf("data.txt => %s",strerror(errno));
+                break;
+            }
+        }
         printf("./leitor => Dado: %s\n",dado);
         
         if(strcmp(dado,"continuar") == 0){
-            write(pfd,continuar,strlen(continuar)+1);
+            if(write(pfd,continuar,strlen(continuar)+1) == -1){
+                if(errno != 17){
+                    printf("data.txt => %s",strerror(errno));
+                    break;
+                }
+            }
         }
 
         if(strcmp(dado,"finalizado") == 0){
-            write(pfd,"finalizado",strlen(finalizado)+1);
+            if(write(pfd,"finalizado",strlen(finalizado)+1) == -1){
+               if(errno != 17){
+                printf("data.txt => %s",strerror(errno));
+                break;
+               }
+            }
             break;
         }
         close(pfd);
