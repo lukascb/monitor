@@ -21,13 +21,6 @@ int main(void){
    
     
     while (1){
-        if(pfd = open(FIFO,O_RDWR|O_NONBLOCK)){
-            if(errno != 17){
-                printf("data.txt => %s => %d",strerror(errno),errno);
-                break;
-            }
-        }
-        sleep(1);
         if(read(pfd,dado,sizeof(dado)) == -1){
             if(errno != 17){
                 printf("data.txt => %s",strerror(errno));
@@ -54,7 +47,7 @@ int main(void){
             }
             break;
         }
-        close(pfd);
+        sleep(1);
     }
     close(pfd);
 }
