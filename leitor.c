@@ -11,11 +11,14 @@
 #define FIFO "./data.txt"
 
 int main(void){
-    mkfifo(FIFO,O_CREAT|O_RDWR|0640);
     char dado[20];
     char *finalizado = "finalizado";
     char *continuar = "continuar";
 
+    if (mkfifo(FIFO,O_CREAT|O_RDWR|0640) != 0){
+        printf("data.txt => %s: id: %d",strerror(errno),errno);
+    }
+    
     int pfd = open(FIFO,O_RDWR|O_NONBLOCK);
     int w = write(pfd,continuar,strlen(continuar)+1);
    
