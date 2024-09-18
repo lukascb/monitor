@@ -19,11 +19,6 @@ int main(void){
     int pfd = open(FIFO,O_RDWR|O_NONBLOCK);
     int w = write(pfd,continuar,strlen(continuar)+1);
    
-    /*if(pfd == -1 || w == -1){
-        perror("data.txt");
-        return 1;
-    }*/
-
     
     while (1){
         if(pfd = open(FIFO,O_RDWR|O_NONBLOCK)){
